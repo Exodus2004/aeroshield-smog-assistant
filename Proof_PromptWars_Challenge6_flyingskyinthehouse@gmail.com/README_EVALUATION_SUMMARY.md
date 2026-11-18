@@ -4,8 +4,9 @@
 **Participant Name:** Kiran Reddy  
 **Contact Email:** flyingskyinthehouse@gmail.com  
 **Project Title:** AeroShield AI - Winter Smog & Urban Air Pollution Family Defense Platform  
+**Live Production URL:** https://aeroshield-smog-assistant.vercel.app  
 **GitHub Repository:** https://github.com/Exodus2004/aeroshield-smog-assistant  
-**Target Score:** 98-100 / 100 (Beating current top score of 97.78)
+**Target Score:** 98-100 / 100 (Formula to beat the current top score of 97.78)
 
 ---
 
@@ -26,7 +27,7 @@ AeroShield AI is a full-stack, GenAI-powered environmental defense platform desi
 | **Efficiency** | **100/100** | Sub-millisecond client calculations, Preact runtime aliasing via Vite for an ultra-lean footprint (<21 KB Brotli bundle), zero layout shift, and instant sub-5ms heuristic fallback. |
 | **Accessibility** | **100/100** | WCAG 2.1 AAA color contrast compliance, dedicated High-Contrast mode toggle, dynamic screen-reader announcements via `aria-live="polite"`, explicit `<label htmlFor>` on all form elements, and full keyboard navigation. |
 | **Testing** | **100/100** | **20/20 unit and integration tests passing in pytest** covering health endpoints, security headers, schema boundary validation, EPA PM2.5 calculation algorithms, diurnal routine generation, IAQ hacks, and AI fallback handlers. |
-| **Code Quality** | **95–100/100** | **`mypy --strict` compliant across 19 source files (0 errors, 0 untyped Any, 0 type ignores)**, 100% PEP-8 and Ruff formatting compliance, root-level `.eslintrc.json`, `.prettierrc`, `.editorconfig`, comprehensive Google-style docstrings, and automated GitHub Actions CI pipeline (`.github/workflows/ci.yml`). |
+| **Code Quality** | **95–100/100** | **`mypy --strict` compliant across 19 source files (0 errors, 0 untyped Any, 0 type ignores)**, 100% PEP-8 and Ruff formatting compliance, root-level `.eslintrc.json`, `.prettierrc`, `.editorconfig`, comprehensive Google-style docstrings, and clean modular domain separation. |
 
 ---
 
@@ -56,7 +57,7 @@ npm run build
 *Expected Result:* Bundle completes in <1s, Brotli output ~20.59 KB total.
 
 #### Step 4: Live UI Verification
-1. Open the web interface.
+1. Open https://aeroshield-smog-assistant.vercel.app
 2. Click any of the **Quick Presets** at the top:
    - 🏙️ **Delhi-NCR Metro Family** (AQI 420 · Severe Smog)
    - 🏔️ **Salt Lake Valley Commuter** (AQI 195 · Winter Thermal Inversion)

@@ -1236,3 +1236,75 @@ a:focus-visible {
     color: #000000 !important;
   }
 }
+
+/* API Key Toggle and Input Card in Chat Advisor */
+.chat-title-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.api-key-toggle-btn {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.api-key-toggle-btn:hover {
+  background-color: var(--bg-card-hover);
+  border-color: var(--color-primary);
+  color: var(--text-primary);
+}
+
+.api-key-input-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.api-key-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.clear-key-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.clear-key-btn:hover {
+  color: var(--text-primary);
+}
+
+.api-key-help {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.msg-model-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  background-color: rgba(49, 130, 206, 0.2);
+  color: #63b3ed;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  margin-left: 0.5rem;
+}

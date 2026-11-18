@@ -4,7 +4,7 @@
 
 import { calculateLocalSmogPlan, calculateLocalChatReply } from './resilientEngine.js';
 
-const REQUEST_TIMEOUT_MS = 3500;
+const REQUEST_TIMEOUT_MS = 4500;
 
 async function fetchWithTimeout(url, options = {}, timeoutMs = REQUEST_TIMEOUT_MS) {
   const controller = new AbortController();
@@ -45,17 +45,23 @@ export async function generateSmogPlan(formData) {
   }
 }
 
-export async function sendChatMessage(query, aqi = 250, vulnerability = 'GENERAL_HOUSEHOLD') {
+export async function sendChatMessage(query, aqi = 250, vulnerability = 'GENERAL_HOUSEHOLD', apiKey = '') {
   try {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    if (apiKey) {
+      headers['x-gemini-api-key'] = apiKey;
+    }
+
     const response = await fetchWithTimeout('/api/v1/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
       body: JSON.stringify({
         message: query,
         current_aqi: Number(aqi) || 250,
         vulnerability: vulnerability || 'GENERAL_HOUSEHOLD',
+        apiKey: apiKey || undefined,
       }),
     });
 

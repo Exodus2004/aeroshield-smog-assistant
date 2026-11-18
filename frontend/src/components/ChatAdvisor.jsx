@@ -3,6 +3,15 @@ import { useState } from 'preact/hooks';
 import { sendChatMessage } from '../services/api.js';
 
 export function ChatAdvisor({ currentAqi, vulnerability }) {
+  const [apiKey, setApiKey] = useState(() => {
+    try {
+      return localStorage.getItem('aeroshield_gemini_key') || '';
+    } catch {
+      return '';
+    }
+  });
+  const [showKeyInput, setShowKeyInput] = useState(false);
+
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
@@ -16,11 +25,21 @@ export function ChatAdvisor({ currentAqi, vulnerability }) {
         'How to protect kids during the morning school run?',
         'Cooking ventilation tips to prevent indoor PM2.5 spikes',
       ],
+      model: 'AeroShield Resilient Engine',
     },
   ]);
 
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const handleKeySave = val => {
+    setApiKey(val);
+    try {
+      localStorage.setItem('aeroshield_gemini_key', val);
+    } catch (e) {
+      console.warn('Could not save API key to localStorage', e);
+    }
+  };
 
   const handleSend = async queryText => {
     const textToSend = queryText || input;
@@ -32,12 +51,13 @@ export function ChatAdvisor({ currentAqi, vulnerability }) {
     setLoading(true);
 
     try {
-      const response = await sendChatMessage(textToSend, currentAqi, vulnerability);
+      const response = await sendChatMessage(textToSend, currentAqi, vulnerability, apiKey);
       const assistantMsg = {
         role: 'assistant',
         content: response.reply,
         takeaway: response.actionable_takeaway,
         chips: response.suggested_quick_chips || [],
+        model: response.model_used || (apiKey ? 'Google Gemini 1.5 Flash' : 'AeroShield Resilient Engine'),
       };
       setMessages(prev => [...prev, assistantMsg]);
     } catch {
@@ -48,6 +68,7 @@ export function ChatAdvisor({ currentAqi, vulnerability }) {
           content: 'Keep indoor air filtration running and windows sealed during morning and evening inversions.',
           takeaway: 'Focus on indoor room filtration and sealing perimeter drafts.',
           chips: ['How do I build a DIY Corsi-Rosenthal box?'],
+          model: 'AeroShield Resilient Engine',
         },
       ]);
     } finally {
@@ -59,12 +80,57 @@ export function ChatAdvisor({ currentAqi, vulnerability }) {
 
   return (
     <div className="tab-pane" role="tabpanel" id="pane-chat" aria-labelledby="tab-chat">
-      <div className="section-title-wrap">
-        <h3 className="pane-title">💬 Interactive GenAI Clean Air Planning Consultant</h3>
-        <p className="section-desc">
-          Receive personalized scientific advice on particle infiltration, DIY air filtration engineering, and safe daily routine timing.
-        </p>
+      <div className="section-title-wrap chat-title-wrap">
+        <div>
+          <h3 className="pane-title">💬 Interactive GenAI Clean Air Planning Consultant</h3>
+          <p className="section-desc">
+            Receive personalized scientific advice on particle infiltration, DIY air filtration engineering, and safe daily routine timing.
+          </p>
+        </div>
+
+        <div className="api-key-toggle-area">
+          <button
+            type="button"
+            className="api-key-toggle-btn"
+            onClick={() => setShowKeyInput(!showKeyInput)}
+            aria-expanded={showKeyInput}
+            aria-label="Toggle Gemini API Key settings"
+          >
+            {apiKey ? '🔑 Gemini API Key Connected' : '🔑 Custom API Key (Optional)'}
+          </button>
+        </div>
       </div>
+
+      {showKeyInput && (
+        <div className="api-key-input-card">
+          <label htmlFor="gemini-key" className="form-label">
+            Google Gemini API Key (Optional):
+          </label>
+          <div className="api-key-input-row">
+            <input
+              id="gemini-key"
+              type="password"
+              className="form-input"
+              placeholder="Paste AI Studio API key (AIzaSy...)..."
+              value={apiKey}
+              onInput={e => handleKeySave(e.target.value)}
+            />
+            {apiKey && (
+              <button
+                type="button"
+                className="clear-key-btn"
+                onClick={() => handleKeySave('')}
+                aria-label="Clear API key"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <small className="api-key-help">
+            If left blank, AeroShield runs on its built-in, zero-downtime scientific heuristic engine (under 5ms).
+          </small>
+        </div>
+      )}
 
       {latestAssistant && latestAssistant.takeaway && (
         <div className="actionable-takeaway-banner" role="alert">
@@ -101,6 +167,7 @@ export function ChatAdvisor({ currentAqi, vulnerability }) {
           <div key={idx} className={`chat-message ${m.role === 'user' ? 'msg-user' : 'msg-assistant'}`}>
             <div className="msg-header">
               <span className="msg-role">{m.role === 'user' ? '👤 You' : '🛡️ AeroShield AI'}</span>
+              {m.model && <span className="msg-model-tag">{m.model}</span>}
             </div>
             <div className="msg-body">
               {m.content.split('\n').map((line, lIdx) => (

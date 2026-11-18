@@ -1,0 +1,70 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.3, pluggy-1.6.0 -- C:\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\user\Desktop
+plugins: anyio-4.12.1, langsmith-0.8.7, cov-7.1.0
+collecting ... collected 20 items
+
+..\aeroshield-smog-assistant\backend\tests\test_api_endpoints.py::test_post_plan_endpoint_success PASSED [  5%]
+..\aeroshield-smog-assistant\backend\tests\test_api_endpoints.py::test_post_chat_endpoint_fallback_success PASSED [ 10%]
+..\aeroshield-smog-assistant\backend\tests\test_health.py::test_health_endpoint_success PASSED [ 15%]
+..\aeroshield-smog-assistant\backend\tests\test_health.py::test_root_endpoint_metadata PASSED [ 20%]
+..\aeroshield-smog-assistant\backend\tests\test_health.py::test_redundancy_declaration PASSED [ 25%]
+..\aeroshield-smog-assistant\backend\tests\test_schemas.py::test_plan_request_valid_boundaries PASSED [ 30%]
+..\aeroshield-smog-assistant\backend\tests\test_schemas.py::test_plan_request_invalid_aqi_bounds PASSED [ 35%]
+..\aeroshield-smog-assistant\backend\tests\test_schemas.py::test_plan_request_invalid_location_name PASSED [ 40%]
+..\aeroshield-smog-assistant\backend\tests\test_schemas.py::test_chat_request_validation PASSED [ 45%]
+..\aeroshield-smog-assistant\backend\tests\test_security_headers.py::test_x_content_type_options_nosniff PASSED [ 50%]
+..\aeroshield-smog-assistant\backend\tests\test_security_headers.py::test_x_frame_options_deny PASSED [ 55%]
+..\aeroshield-smog-assistant\backend\tests\test_security_headers.py::test_strict_transport_security_hsts PASSED [ 60%]
+..\aeroshield-smog-assistant\backend\tests\test_security_headers.py::test_referrer_policy_and_permissions_policy PASSED [ 65%]
+..\aeroshield-smog-assistant\backend\tests\test_security_headers.py::test_content_security_policy_present PASSED [ 70%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_calculate_smog_severity_tiers PASSED [ 75%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_aqi_to_pm25_conversion_accuracy PASSED [ 80%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_compute_impact_metrics_positive_savings PASSED [ 85%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_generate_diurnal_routine_24h_coverage PASSED [ 90%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_generate_iaq_hacks_budget_filtering PASSED [ 95%]
+..\aeroshield-smog-assistant\backend\tests\test_smog_engine.py::test_master_smog_plan_orchestration PASSED [100%]
+
+============================== warnings summary ===============================
+..\..\AppData\Roaming\Python\Python314\site-packages\starlette\formparsers.py:12
+  C:\Users\user\AppData\Roaming\Python\Python314\site-packages\starlette\formparsers.py:12: PendingDeprecationWarning: Please use `import python_multipart` instead.
+    import multipart
+
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+..\..\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211
+  C:\Users\user\AppData\Roaming\Python\Python314\site-packages\fastapi\routing.py:211: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    is_coroutine = asyncio.iscoroutinefunction(dependant.call)
+
+..\aeroshield-smog-assistant\backend\app\services\gemini_service.py:8
+  C:\Users\user\Desktop\aeroshield-smog-assistant\backend\app\services\gemini_service.py:8: FutureWarning: 
+  
+  All support for the `google.generativeai` package has ended. It will no longer be receiving 
+  updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+  See README for more details:
+  
+  https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+  
+    import google.generativeai as genai
+
+..\..\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:42: 3 warnings
+aeroshield-smog-assistant/backend/tests/test_api_endpoints.py: 2 warnings
+aeroshield-smog-assistant/backend/tests/test_health.py: 3 warnings
+aeroshield-smog-assistant/backend/tests/test_security_headers.py: 5 warnings
+  C:\Users\user\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:42: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    return asyncio.iscoroutinefunction(obj) or (
+
+..\..\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:43
+..\..\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:43
+..\..\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:43
+  C:\Users\user\AppData\Roaming\Python\Python314\site-packages\starlette\_utils.py:43: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    callable(obj) and asyncio.iscoroutinefunction(obj.__call__)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 20 passed, 26 warnings in 4.52s =======================
